@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function a() {
+            console.log(this);
+        }
+        a.call(null);
+        /*window对象，如果第一个参数传入的调用者是null或者undefined,call方法把全局对象作为this值,
+        在严格模式下,null就是null,undefined就是undefined*/
+        
+
+    </script>
+</body>
+</html>

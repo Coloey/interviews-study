@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        window.number = 2;
+        var obj = {
+        number: 3,
+        db1: (function(){
+          console.log(this);
+          this.number *= 4; 
+          return function(){
+           console.log(this);
+           this.number *= 5;
+          }
+        })()
+        }
+        var db1 = obj.db1;
+        db1();
+        obj.db1();
+        console.log(obj.number);     // 15
+        console.log(window.number);  // 40
+        /*执行db1()时，this指向全局作用域，所以window.number * 4 = 8，然后执行匿名函数， 所以window.number * 5 = 40；
+执行obj.db1()时，this指向obj对象，执行匿名函数，所以obj.numer * 5 = 15*/
+    </script>
+</body>
+</html>

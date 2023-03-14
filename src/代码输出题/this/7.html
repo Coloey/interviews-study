@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var myObject = {
+        foo: "bar",
+        func: function() {
+            var self = this;
+            console.log(this.foo);  
+            console.log(self.foo);  
+            (function() {
+                console.log(this.foo);  
+                console.log(self.foo);  
+            }());
+        }
+    };
+    myObject.func();
+    /*bar bar undefined bar 立即执行匿名函数表达式是由window调用的，this指向window,立即执行匿名函数的作用域处于myObject.func的作用域
+    中，在这个作用域中找不到self变量,沿着作用域链向上找到self变量，找到了指向myObject对象的self*/
+    </script>
+</body>
+</html>

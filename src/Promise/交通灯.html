@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const light = (cb, time) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          cb();
+          resolve();
+        }, time);
+      });
+  };
+    function green() {
+      console.log("green");
+    }
+    function red() {
+      console.log("red");
+    }
+    function yellow() {
+      console.log("yellow");
+    }
+    /*function run(){
+      Promise.resolve()
+      .then((r) => {
+        light(green, 1000);
+      })
+      .then((r) => {
+        light(yellow, 2000);
+      })
+      .then((r) => {
+        light(red, 3000);
+      });
+      run()
+    }
+    run()*/
+    
+      async function run(){
+        await light(green,1000)
+        await light(yellow,2000)
+        await light(red,3000)
+        run()
+      }
+      run()
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #middle,#left,#right {
+            /* 设置浮动 */
+            float: left;
+        }
+        /* 父容器左右内边距 */
+        #content {
+            height: 400px;
+            overflow: hidden;
+            padding: 0  200px;
+        }
+        #middle {
+            width: 100%;
+            height: 400px;
+            background: red;           
+        }
+        
+        #left {
+            width: 200px;
+            height: 400px;
+            background: blue;
+            /* left在下方，-100%移到左边，因为设置了padding,此时有左内边距，因此需要设置定位为相对定位，left移动负自身宽度 */
+            margin-left: -100%;
+            position: relative;
+            left: -200px;
+        }
+        #right {
+            width: 200px;
+            height: 400px;
+            background: blue;
+            /* right在右边，margin-left移动负自身宽度移动到上方右边，因为存在右内边距，设置相对定位，left移动自身宽度 */
+            margin-left: -200px;
+            position: relative;
+            left: 200px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="middle"></div>
+        <div id="left"></div>
+        <div id="right"></div>
+    </div>
+</body>
+</html>

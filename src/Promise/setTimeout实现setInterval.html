@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mySetinterval(fn,delay,args){
+            let cancel=false
+            const task=function(){
+                if(!cancel){
+                    setTimeout(()=>{
+                        fn.apply(this,args)
+                        task()
+                    },delay)
+                }
+            }
+            task()
+            return function(){cancel=true}
+        }
+        function clearInterval(interval){
+            interval()
+        }
+        const interval=mySetinterval(function () {
+            console.log('hi')
+          },1000)
+        clearInterval(interval)
+        
+    </script>
+</body>
+</html>

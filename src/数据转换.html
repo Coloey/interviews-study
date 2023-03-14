@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var products = [
+        {name:"1", category:['a','b','c']},
+        {name:"2", category:['a','b']},
+        {name:"3", category:['a','c']}
+    ]
+   
+    function getCategory(products){
+        let map=new Map()
+        products.forEach(p=>{
+            p.category.forEach(c=>{
+                if(!map.has(c)){
+                    //let children=[]
+                    map.set(c,[{name:p.name}])
+                }else{
+                    let val=map.get(c)
+                    map.set(c,[...val,{name:p.name}])
+                }
+            })
+        })
+        let res=[]
+        for(let [key,value] of map){
+            res.push({name:key,children:value})
+        }
+        return res
+
+    }
+    console.log(getCategory(products))
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const p1 = new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('resolve3');
+            console.log('timer1')
+        }, 0)
+        resolve('resovle1');
+        resolve('resolve2');
+        }).then(res => {
+            console.log(res)  // resolve1
+            setTimeout(() => {
+                console.log(p1)
+            }, 1000)
+        }).finally(res => {
+            console.log('finally', res)
+            throw new Error("catch 1")
+        })
+        /*  resolve1
+            finally  undefined
+            timer1
+            Promise{<resolved>: undefined}*/
+        /*finally()不管Promise对象最后状态如何都会执行，finally()的回调函数不接受任何参数，在
+        .finally()中无法知道Promise的最终状态是fullfilled还是rejected,忽略finally的返回值，它
+        最终返回默认上一次的Promise对象值，不过如果抛出一个异常，则会返回异常的Promise对象
+        这里定时器里的p1，返回的是undefined,因为p1其实是.finally的返回值，.finally的返回值在没有抛出错误的情况下
+        默认是上一个Promise的返回值，而这里.finally上一个Promsie是.then(),但是这个.then()并没有返回值，所以p1
+        打印出的Promise的值会是undefined,如果定时器下return 1则值变为1
+        */
+    </script>
+</body>
+</html>

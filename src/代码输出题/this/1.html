@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = { 
+            name : 'cuggz', 
+            fun : function(){ 
+                console.log(this.name); 
+                return 1
+            } 
+        } 
+        obj.fun()     // cuggz
+        new obj.fun() // undefined使用new构造函数时，其this指向的是全局环境的window
+    </script>
+</body>
+</html>

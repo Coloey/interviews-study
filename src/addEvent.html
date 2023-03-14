@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">btn</button>
+    <script>
+        /*let btn = document.getElementById("btn")
+        let invoker=[]
+        
+        btn.addEventListener("click",()=>{
+          invoker.push(()=>{
+              console.log("1")
+          })
+        })
+        btn.addEventListener("click",()=>{
+          invoker.push(()=>{
+              console.log("2")
+          })
+        })
+        setTimeout(()=>{
+            console.log(invoker)       
+            for(let i=invoker.length-1;i>=0;i--){
+                invoker[i]()
+            }
+
+        },1000)*/
+        function parant(){
+            this.name='parent',
+            thia.age=40
+
+        }
+        function children(){
+            this.name='children'
+        }
+        children.prototype=Object.create(parant.prototype)
+        children.constructor=children
+        Reflect.ownKeys(children).forEach(key=>{
+            console.log(key)
+        })
+        
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function averageTime(arr){
+        let res=0
+        arr.forEach(el=>{
+           // console.log(new Date('2000/01/01 '+el).getTime())
+            res+=new Date('2000/01/01 '+el).getTime()
+        })
+        const a=new Date(res/arr.length)
+        console.log(`${a.getHours()}:${a.getMinutes()}`)
+    }
+    averageTime(['8:01','9:30','11:50'])
+    </script>
+    
+</body>
+</html>

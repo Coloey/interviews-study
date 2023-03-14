@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getParams(url){
+        const res={}
+        if(url.includes('?')){
+            let str=url.split('?')[1]
+            let arr=str.split('&')
+            for(let item of arr){
+                const key=item.split('=')[0]
+                const value=item.split('=')[1]
+                res[key]=decodeURIComponent(value)//解码
+            }
+        }
+        return res
+    }
+    const user=getParams('http://www.baidu.com?user=%E9%98%BF%E9%A3%9E&age=16')
+    console.log(user)
+    </script>
+</body>
+</html>

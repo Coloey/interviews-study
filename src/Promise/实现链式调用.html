@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    class Chain{
+        constructor(){
+            this.taskList=[]
+        }
+        eat(){
+            this.taskList.push(
+                ()=> new Promise(r=>{
+                console.log('eat')
+                r()
+            }))
+            return this
+        }
+        sleep(time){
+            this.taskList.push(()=>new Promise(resolve=>{
+                setTimeout(()=>{
+                    console.log('sleep')
+                    resolve()
+                },time)
+            }))
+            return this
+        }
+        async work(){
+            for(let p of this.taskList){
+                await p()
+            }
+        }
+    }
+    const chain=new Chain()
+    chain.eat().sleep(3000).eat().work()
+   </script>
+</body>
+</html>

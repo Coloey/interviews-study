@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		let arr = [()=>{
+			return new Promise(resolve=>{
+				console.log("run1", Date.now());
+				resolve()
+			})
+		},()=>{
+			return new Promise(resolve=>{
+				console.log("run2", Date.now());
+				resolve()
+			})
+		},()=>{
+			return new Promise(resolve=>{
+				console.log("run3", Date.now());
+				resolve()
+			})
+		}];
+		//方法一：async 
+		/*async function order(){
+			for(let i=0;i<arr.length;i++){
+				await arr[i]()
+			}
+		}
+		order()*/
+		//方法二：reduce
+		/*arr.reduce((pre,curr)=>{
+			 return pre.then((resolve)=>{
+			 	return new Promise(resolve=>{
+					curr()
+			 		resolve()
+			 	})
+			 })
+		},Promise.resolve())*/
+		let p = Promise.resolve()
+		arr.forEach(promise=>{
+			p.then(()=>{
+				promise()
+			})
+		})
+	</script>
+</body>
+</html>
+
+

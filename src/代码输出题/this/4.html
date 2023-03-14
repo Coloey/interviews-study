@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = 1;
+        function printA(){
+            console.log(this.a);
+        }
+        var obj={
+            a:2,
+            foo:printA,
+            bar:function(){
+                printA();
+            }
+        }
+
+        obj.foo(); // 2,foo由obj调用,foo指向printA这个函数，外部调用obj.foo()方法，this指向obj对象
+        obj.bar(); // 1,printA在bar方法中执行，this指向window
+        var foo = obj.foo;
+        foo(); // 1,foo在全局对象中执行，this指向window
+        
+        
+    </script>
+</body>
+</html>

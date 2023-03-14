@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        (function(){
+        var x = y = 1;
+        })();
+        var z;
+
+        console.log(y); // 1
+        console.log(z); // undefined
+        console.log(x); // Uncaught ReferenceError: x is not defined
+        /*var x=y=1,从右往左执行，首先执行y=1,因为y没有使用var声明，所以是一个全局变量，然后将y赋值给x,将一个全局变量赋值给一个局部变量，
+        最终，x是一个局部变量，y是一个全局变量，所以打印x是报错*/
+    </script>
+</body>
+</html>

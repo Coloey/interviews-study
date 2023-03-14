@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button tag="login" id="button">点击</button>
+    <script>
+        //装饰者
+    /*var decorator=function(input,fn){
+        //获取事件源
+        var input=document.getElementById(input)
+        //若事件源已经绑定事件
+        if(typeof input.onclick==='function'){
+            //缓存事件原有回调函数
+            var oldClickFn=input.onclick
+            input.onclick=function(){
+                //事件原有回调函数
+                oldClickFn()
+                //执行事件新增回调函数
+                fn()
+            }
+        }else{
+            //事件源未绑定事件，直接为事件源添加新增回调函数
+            input.onclick=fn
+        }
+    }
+    //电话输入框功能装饰
+    decorator('tel_input',function(){
+        document.getElementById('tel_demo_text').style.display='none'
+    })
+    //姓名输入框功能装饰
+    decorator('name_input',function(){
+        document.getElementById('name_demo_text').style.display='none'
+    })*/
+    /*let plane ={
+        fire:function(){
+            console.log('发射普通子弹')
+        }
+    }
+    let missileDecorator = function () {
+        console.log('发射导弹')
+    }
+    let atomDecorator = function(){
+        console.log('发射原子弹')
+    }
+    let fire1 = plane.fire
+    plane.fire=function(){       
+        fire1()
+        missileDecorator()
+    }
+    let fire2 = plane.fire
+    plane.fire = function(){
+        fire2()
+        atomDecorator()
+    }
+   
+    plane.fire()
+    Function.prototype.before = function(beforefn){
+        let _self = this//保存原函数的引用
+        return function(){//返回包含了原函数和新函数的代理函数
+            beforefn.apply(this,arguments)//执行新函数，且保证this不被劫持，新函数接受的参数也会被原封不动地传入原函数，新函数在原函数之前执行
+            return _self.apply(this,arguments)//执行原函数并返回原函数的执行结果，并且保证this不被劫持
+        }
+    }
+    Function.prototype.after = function(afterfn){
+        let _self = this
+        return function(){
+            let ret = _self.apply(this,arguments)
+            afterfn.apply(this,arguments)
+            return ret
+        }
+    }
+    document.getElementById= document.getElementById.before(function(){
+        alert(1)
+    })
+    let button = document.getElementById('button')*/
+    let showLogin = function(){
+        console.log('打开登录浮层')
+    }
+    let log = function(){
+        console.log('上报标签为:'+this.getAttribute('tag'))
+    }
+    showLogin = showLogin.after(log)//打开浮层后上报数据
+    document.getElementById('button').onclick = showLogin
+    //动态改变参数
+    let ajax = function(type,url,param){
+        console.log(param)
+    }
+    let getToken = function(){
+        return "Token"
+    }
+    ajax = ajax.before(function(type,url,param){
+        param.Token = getToken()
+    })
+    ajax('get','http://xxx.com',{name:'seven'})
+    
+    //表单验证
+    let validate = function(){
+        if(username.value === ''){
+            alert('用户名不能为空')
+            return false
+        }
+        if(password.value === ''){
+            alert('密码不为空')
+            return false
+        }
+    }
+    Function.prototype.before = function(beforefn){
+        let _self = this
+        return function(){
+            if(beforefn.apply(this,arguments)===false){
+                return ;
+            }
+            return _self.apply(this,arguments)
+        }
+    }
+    let formSubmit = function(){
+        let param ={
+            username:username.value,
+            password:password.value
+        }
+        ajax('http://xxx.com/login',param)
+    }
+    formSubmit=formSubmit.before(validate)
+    let submit = document.getElementById('submitBtn')
+    submit.onclick=function () {formSubmit()}
+    </script>
+</body>
+</html>

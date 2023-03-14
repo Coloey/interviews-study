@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Scheduler {
+      constructor(maxNum) {
+        this.taskList = [];
+        this.count = 0;
+        this.maxNum = maxNum;
+      }
+
+      add(promiseCreator) {
+        this.taskList.push(promiseCreator);
+      }
+      start() {
+        if(this.taskList.length===0)return
+		       
+        while(this.count<this.maxNum){
+          //运行任务增加
+          this.count++
+          this.taskList
+            .shift()()
+            .then(()=>{
+              //一个任务执行完成,减少一个任务
+              this.count--
+              //任务数减少继续增加任务
+              this.start()
+            })
+        }      
+      }
+    }
+
+    const timeout = (time) =>
+    	new Promise((resolve) => {
+        	setTimeout(resolve, time);
+      	});
+
+    
+    const scheduler = new Scheduler(2);
+    const addTask = (time, order) => {
+    	scheduler.add(() => timeout(time).then(() => console.log(order)));
+    };
+    addTask(1000, "1");
+    addTask(500, "2")
+    addTask(300, "3");
+    addTask(400, "4");
+    scheduler.start();
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var length = 10;
+        function fn() {
+            console.log(this.length);
+        }
+        
+        var obj = {
+            length: 5,
+            method: function(fn) {
+                    fn();
+                    console.log(arguments)
+                    arguments[0]();
+                }
+        };
+        
+        obj.method(fn, 1);//10 2
+        /*第一次执行fn()，this指向window对象，输出10。
+第二次执行arguments0，相当于arguments调用方法，this指向arguments，而这里传了两个参数，故输出arguments长度为2。*/
+        
+    </script>
+</body>
+</html>

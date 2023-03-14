@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+    /* let person=function(){
+   this. name="Ann",
+    this.friends=["Mary","Harry","Van"]
+}
+let anotherPerson=Object.create(person);
+console.log(person.prototypeconsole.log(anotherPerson.__proto__)
+anotherPerson.__proto__.friends.push("Mike");
+console.log(person.friends);// ['Mary', 'Harry', 'Van', 'Mike']*/
+/*[1,2,3].reduce(
+    (p,curr)=>{
+        return p.then(()=>new Promise(r=>{
+                setTimeout(()=>r(console.log(curr)),1000)
+            })
+
+        )
+    },Promise.resolve()
+)*/
+/*new Promise((resolve)=>{
+   return resolve(console.log(1))
+}).then(()=>{
+   return new Promise(r=>{
+       setTimeout(()=>r(console.log(2)),1000)
+   })
+}).then(()=>{
+    return new Promise(r=>{
+        setTimeout(()=>r(console.log(3)),1000)
+    })
+   
+})*/
+// class PrimitiveNumber{
+//     [Symbol.hasInstance]
+// }
+let product={price:10,quantity:2},total=0;
+
+const targetMap=new WeakMap()
+const effect=()=>{total=product.price*product.quantity}
+const track=(target,key)=>{
+    let depsMap=targetMap.get(target)
+    if(!depsMap){
+        targetMap.set(target,(depsMap=new Map()))//如果depsMap没有这个key则设置一个key，value保存的是对应dep的集合
+    }
+    let dep=depsMap.get(key)
+    if(!dep){
+       depsMap.set(key,dep=new Set())
+    }
+    dep.add(effect)//有这个key直接往集合里面添加回调函数,set收集副作用
+
+}
+const trigger=(target,key)=>{
+    let depsMap=targetMap.get(target)
+    if(!depsMap)return;
+    let dep=depsMap.get(key)//得到对应key的回调函数集合
+    if(dep)dep.forEach(effect=>effect())
+    
+}
+track(product,'price')
+console.log(`total:${total}`)
+effect()
+console.log(`total:${total}`)
+product.price=20;
+trigger(product,'price')
+console.log(`total:${total}`)
+    </script>
+</body>
+</html>

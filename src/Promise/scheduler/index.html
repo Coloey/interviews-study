@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //console.log(window.temp)
+        
+        /*function a() {           
+            var temp = 10;//局部变量
+            b();
+        }
+        function b() {
+            console.log(temp); // 报错 Uncaught ReferenceError: temp is not defined
+        }
+        a();*/
+        /*var a=3;
+        function c(){
+            alert(a);
+        }
+        (function(){
+        var a=4;
+        c();
+        })();*/
+
+        function Foo(){
+            Foo.a = function(){
+                console.log(1);
+            }
+            this.a = function(){
+                console.log(2)
+            }
+        }
+
+        Foo.prototype.a = function(){
+            console.log(3);
+        }
+
+        Foo.a = function(){
+            console.log(4);
+        }
+
+        Foo.a();//4,内部属性方法还未被调用
+        let obj = new Foo();
+        obj.a();//2 Foo方法实例化后内部属性方法初始化，原型链建立，先查找ownProperty，没有才去原型链上找
+        Foo.a();//1 内部已经初始化，内部的Foo.a覆盖静态方法，
+        
+       
+    </script>
+</body>
+</html>

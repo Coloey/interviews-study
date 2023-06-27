@@ -21,7 +21,7 @@
         }
     };
     myObject.func();
-    /*bar bar undefined bar 立即执行匿名函数表达式是由window调用的，this指向window,立即执行匿名函数的作用域处于myObject.func的作用域
+    /*bar bar undefined bar 立即执行匿名函数表达式是由window调用的，里面this指向window,立即执行匿名函数的作用域处于myObject.func的作用域
     中，在这个作用域中找不到self变量,沿着作用域链向上找到self变量，找到了指向myObject对象的self*/
     </script>
 </body>

@@ -8,8 +8,7 @@ function loadImg(src){
         img.error=function(){
             reject(new Error(`Can not load ${src}`))
         }
-        img.src=src
-        
+        img.src=src       
     })
 }
 function timeout(){

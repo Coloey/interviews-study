@@ -13,7 +13,7 @@ var Event=(function(){
     trigger = function(){
         let key = Array.prototype.shift.call(arguments),
             fn = clientList[key];
-        if(!fns ||fns.length===0){
+        if(!fns || fns.length===0){
             return false
         }
         for(let i=0;fn;fn=fns[i++]){

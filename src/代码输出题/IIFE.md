@@ -11,15 +11,15 @@ result;//'Berry'
 IIFE和闭包的结合使用
 ES5没有块作用域的影响：
 ```js
-var arr = [];
-    for (var i=0;i<3;i++){
-      arr[i] = function () {
-        return i;
-      };
-    }
-    console.log(arr[0]());
-    console.log(arr[1]());
-    console.log(arr[2]());//3,3,3
+  var arr = [];
+  for (var i=0;i<3;i++){
+    arr[i] = function () {
+      return i;
+    };
+  }
+  console.log(arr[0]());
+  console.log(arr[1]());
+  console.log(arr[2]());//3,3,3
 ```
 ```js
 var arr = [];

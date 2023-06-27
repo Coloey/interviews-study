@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+    <!-- Import Vue 3 -->
+    <script src="//unpkg.com/vue@3"></script>
+    <!-- Import component library -->
+    <script src="//unpkg.com/element-plus"></script>
+</head>
+<body>
+    <!-- 父盒子 -->
+    <div class="father_box" @click="onclick">
+        <!-- 生成的标签 -->
+        <div v-for="(item, index) in node.data.TagsAll" :key="index" class="spanbox">
+            <span class="tagspan">{{ item }}</span>
+            <i class="span_close" @click="removeTag(index, item, node.data)"></i>
+        </div>
+        <!-- 输入框 
+            @keyup.delete="deleteTags"-->
+        <input
+            placeholder="输入后按<回车>创建"
+            v-model="node.data.value"
+            @keyup.enter="addTags(node)"
+            :style="inputStyle"
+            class="inputTag"
+            ref="inputTag"
+            type="text"
+        />
+    </div>
+    <script>
+          //删除tag
+    removeTag(index, item, node) {
+      node.TagsAll.splice(index, 1);
+    },
+ 
+    //回车增加tag
+    addTags(node) {
+ 
+      if (node.data.value) {
+ 
+          //添加tag
+          node.data.TagsAll.push(node.data.value);
+ 
+          //清空输入框
+          node.data.value = "";
+      }
+    }
+ 
+    //点击父盒子输入框获取焦点
+    onclick() {
+      //   console.log(2345);
+    }
+    </script>
+</body>
+</html>

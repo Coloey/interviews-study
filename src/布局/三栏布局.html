@@ -12,7 +12,7 @@
     padding: 0;
   }
 
-  .container{
+  /* .container{
     overflow: hidden;
   }
 
@@ -33,14 +33,41 @@
     width: 250px;
     height: 200px;
     background: aqua;
-  }
+  } */
+  .main {
+        display: flex;
+        height: 200px;
+        justify-content: space-between;
+        line-height: 200px;
+        text-align: center;
+       
+    }
+    .left {
+        
+        background-color: green;
+    
+    }
+    .right {
+       
+        background-color: green;
+    }
+    .middle {
+        flex:1;
+        background-color: black;
+        color:white;
+    }
 </style>
 <body>
     <!-- 浮动不占空间，如果middle在中间，则左浮动后，整下的位置被middler占满，right在下一行的右边 -->
-    <div class="container">
+    <!-- <div class="container">
         <div class="left"></div>
         <div class="right"></div>
         <div class="middle"></div>
-    </div>  
+    </div>   -->
+    <div class="main">
+      <div class="left">左边固定宽度</div>
+      <div class="middle">中间自适应</div>
+      <div class="right">右边固定宽度</div>
+  </div>  
 </body>
 </html>

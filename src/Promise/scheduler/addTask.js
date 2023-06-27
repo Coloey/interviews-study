@@ -1,7 +1,7 @@
 let urls = ["1", "2", "3", "4", "5", "6", "7"];
 let pool = []; //并发池
 let max = 3; //最大并发数量
-//自定义请求函数
+// 自定义请求函数
 function request(url) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -71,5 +71,7 @@ run(race);
       await Promise.race(pool);
     }
   }
+  //执行完所有任务才返回结果
+  await Promise.allSettled(pool);
 }
 fn();*/

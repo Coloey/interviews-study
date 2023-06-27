@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function sleep(time) {
+      return new Promise((resolve, reject) => {
+          if(time<500) {
+            setTimeout(()=>{
+              resolve();
+            },time)
+          } else {
+            reject();
+          }
+        });
+    }
+    // slepp不用返回回调函数，await接收一个promise，返回回调函数的情况时promise放在一个数组中，拿出来是要执行一个函数，所以需要把promise包装为一个函数
+ async function test() {
+    for(let i=0;i<10;i++){
+      await sleep(2000);
+      console.log(1);
+    }
+ }
+ test();
+  </script>
+</body>
+</html>
+

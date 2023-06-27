@@ -5,7 +5,6 @@ function add(str1, str2) {
   str2.length === maxLength
     ? (str1 = str1.padStart(maxLength, 0))
     : (str2 = str2.padStart(maxLength, 0));
-  console.log(str1, str2);
   //进位标志位
   let flag = 0;
   let res = "";

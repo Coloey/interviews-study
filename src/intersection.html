@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position:  relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .root {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 2px solid slategray;
+            overflow-y: auto;
+        }
+
+        .root img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            height: 210px;
+            border: 1px solid rgb(94, 100, 102);
+        }
+
+    </style>
+</head>
+<body>
+      <div class="root">
+        <img src="./img/default_img.jpg" alt="" data-resource-url="./img/Icon.png">
+        <img src="./img/default_img.jpg" alt="" data-resource-url="./img/unko-anime.gif">
+        <img src="./img/default_img.jpg" alt="" data-resource-url="./img/喇叭.png">
+        <img src="./img/default_img.jpg" alt="" data-resource-url="./img/喵喵.jpg">
+        <img src="./img/default_img.jpg" alt="" data-resource-url="./img/带刀剑士.png">
+      </div>
+    
+      <script>
+        const root = document.querySelector('.root')
+        const imgList = document.querySelectorAll('img')
+
+        const observerOption = {
+            root: root,
+        }
+
+        //创建监听观察者实例
+        const observer = new IntersectionObserver((entries) => {
+            console.log(entries);
+            //entries: 是监听所有IntersectionObserverEntry的集合
+            entries.forEach((item) => {
+                // isIntersecting是一个Boolean值，判断目标元素当前是否可见
+                if (item.isIntersecting) {
+                    // 进入可视区域替换真实图片地址(定时器延迟加载好观察效果)
+                    setTimeout(() => {
+                        item.target.src = item.target.dataset.resourceUrl
+                    },1000)
+                    
+                    // 图片加载后即停止监听该元素
+                    observer.unobserve(item.target)
+                }
+            })
+            
+        }, observerOption)
+
+        //observe遍历监听所有img节点
+        imgList.forEach(img => observer.observe(img))
+      </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function showMoney() {
+        return this.money
+    };
+
+    var personA = new Object;
+    var personB = new Object;
+
+    personA.money= "100";
+    personB.money= "150";
+
+    personA.showMoney= showMoney;
+    personB.showMoney= showMoney;
+    console.log(personA.showMoney(),personB.showMoney());
+
+    </script>
+</body>
+</html>

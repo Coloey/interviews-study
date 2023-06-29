@@ -54,3 +54,14 @@ const maxSubArray = (nums) => {
   }
   return res;
 };
+// 跳跃游戏
+const jump = (nums) => {
+  // 可以跳跃的最远距离
+  let max = 0;
+  // 每此在可以覆盖的的范围max里面取值
+  for (let i = 0; i <= max; i++) {
+    if (i + nums[i] > max) max = i + nums[i];
+    if (max >= nums.length - 1) return true;
+  }
+  return false;
+};

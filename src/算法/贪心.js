@@ -65,3 +65,52 @@ const jump = (nums) => {
   }
   return false;
 };
+// 区间问题
+// 用最少数量引爆气球
+const findMinArrowShots = (points) => {
+  if ((points.length = 0)) return 0;
+  points.sort((a, b) => a[0] - b[0]);
+  // points不为空至少一箭
+  let res = 1;
+  for (let i = 1; i < points.length; i++) {
+    if (points[i][0] > points[i - 1][1]) {
+      res++; // 不挨着至少一箭
+    } else {
+      points[i][1] = Math.max(points[i - 1][1], points[i][1]); // 挨着需要更新气球最小右边界
+    }
+  }
+  return res;
+};
+// 无重叠子区间
+const eraseOverlapIntervals = (intervals) => {
+  if (intervals.length === 0) return 0;
+  let res = 1;
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] > intervals[i - 1][1]) {
+      // 找出不重叠子区间
+      res++;
+    } else {
+      intervals[i][1] = Math.max(intervals[i - 1][1], intervals[i][1]);
+    }
+  }
+  // 重叠区间个数=总区间-不重叠区间
+  return intervals.length - res;
+};
+// 合并区间
+const merge = (intervals) => {
+  let pre = intervals[0];
+  let curr;
+  let res = [];
+  for (let i = 1; i < intervals.length; i++) {
+    curr = intervals[i];
+    if (curr[0] > pre[1]) {
+      // 当前区间和前一个区间没重叠 前一个区间加入 更新区间
+      res.push(pre);
+      pre = curr;
+    } else {
+      // 当前区间和前一个区间重叠 更新前一个区间右边界 即合并区间
+      pre = Math.max(pre[1], curr[1]);
+    }
+  }
+  return res;
+};

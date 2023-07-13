@@ -40,7 +40,7 @@ let observer = new IntersectionObserver((entries, self) => {
         img.src = img.dataset.src;
         img.removeAttribute("data-src");
       }
-      self.unobserve(entry.target);
+      self.unobserve(image.target);
     }
   });
 }, config);

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .hairline {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: relative;
+        border: 1px solid #000;
+    }
+    .hairline::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        border-width: 1px;
+        transform: scale(-50%);
+        transform-origin: 0 0;
+    }
+</style>
+<body>
+    <div class="hairline"></div>
+    <script>
+        /*
+        设备像素比：window.devicePixeRatio=设备物理像素/CSS像素
+        而一个物理像素等于多少个设备像素取决于移动端设备的屏幕特性是否是Retina)和用户缩放比例
+        当window.devicePixeRatio=2时，设置1px CSS像素，移动端会用2个物理像素渲染，为了解决这个问题，有几个方案
+        */
+        /*伪元素先放大后缩小 详细见上
+        目标元素加一个::after伪元素，让这个元素布局为absolute，整个铺在目标元素上，然后宽高设置为目标元素两bei
+        */
+    </script>
+</body>
+</html>

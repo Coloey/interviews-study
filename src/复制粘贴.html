@@ -9,7 +9,7 @@
 <body>
     <script>
         const clipboardriteText = (copyText) => {
-            // 判断是否存在clipboard并且是安全协议
+            // 判断是否存在clipboard并且是安全协议 https协议才能使用这个API
             if(navigator.clipboard && window.isSecureContext) {
                 return new Promise((resolve, reject) => {
                     navigator.clipboard.writeText(copyText).then(()=>{

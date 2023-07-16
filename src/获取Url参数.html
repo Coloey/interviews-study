@@ -23,6 +23,42 @@
     }
     const user=getParams('http://www.baidu.com?user=%E9%98%BF%E9%A3%9E&age=16')
     console.log(user)
+    let url = 'http://www.domain.com/?user=anonymous&id=123&id=456&city=%E5%8C%97%E4%BA%AC&enabled';
+// parseParam(url);
+// /* 结果
+// { user: 'anonymous',
+//   id: [ 123, 456 ], // 重复出现的 key 要组装成数组，能被转成数字的就转成数字类型
+//   city: '北京', // 中文需解码
+//   enabled: true, // 未指定值得 key 约定为 true
+// }
+// */
+// 根据键获取值
+    //同一个键有多个值
+    function getUrlParam(sUrl, sKey) {
+        // 获取?到#之间的字符串
+        const queryStr = sUrl.indexOf('#')===-1 ? sUrl.slice(sUl.indexOf('?')+1) : sUrl.slice(sUrl.indexOf('?')+1, sUrl.indexOf('#'))
+        // 根据&分隔
+        const querys = queryStr.split('&')
+        let queryMap=new Map()
+        for(let query of querys) {
+            let key=query.split('=')[0]
+            let val=query.split('=')[1]
+            // 已经存在一个键值对
+            if(queryMap.has(key)) {
+                let temp=[].concat(queryMap.get(key))
+                temp.push(val)
+                queryMap.set(key,temp)
+            }else{
+                queryMap.set(key,val)
+            }
+        }
+        // 给定的参数有该键则返回值
+        if(queryMap.has(sKey)){
+            return queryMap.get(key)
+        }else{
+            return {}
+        }
+    }
     </script>
 </body>
 </html>

@@ -37,6 +37,25 @@
         /*伪元素先放大后缩小 详细见上
         目标元素加一个::after伪元素，让这个元素布局为absolute，整个铺在目标元素上，然后宽高设置为目标元素两bei
         */
+       /*
+       设置viewport解决问题
+       */
+      let viewport = document.querySelector('meta[name=viewport]')
+      // 根据设备像素设置viewport
+      if(window.devicePixelRatio ===1){
+        viewport.setAttribute('content','width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no')
+      }
+      if(window.devicePixelRatio===2){
+        viewport.setAttribute('content','width=device-width,initial-scale=0.5, maximum-scale=1, minimum-scale=1, user-scalable=no')
+      }
+      if(viewport.devicePixelRatio===3){
+        viewport.setAttribute('content','width=device-width,initial-scale=0.333, maximum-scale=1, minimum-scale=1, user-scalable=no')
+      }
+      function resize() {
+            let width = screen.width > 750 ? '75px' : screen.width / 10 + 'px'
+            document.getElementsByTagName('html')[0].style.fontSize = width
+        }
+        window.onresize = resize
     </script>
 </body>
 </html>

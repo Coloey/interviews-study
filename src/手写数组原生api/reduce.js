@@ -28,3 +28,24 @@ Array.prototype.myReduce=function(callback,initValue){
     }
     return preValue
 }
+//
+function reduce(fn,initValue){
+    if(typeof fn !== 'function'){
+        throw Error("it is not a function")
+    }
+    const arr =this
+    let acc;
+    let initIndex;
+    // 如果没有存入初始值，initval为数组第一项
+    initIndex = arguments.length === 1 ? 1 : 0;
+    // 没有传入初始值 累加器为数组第一位元素
+    acc = arguments.length === 1 ? arr[0] : initValue
+    for(let i=initIndex;i<arr.length;i+){
+        acc=fn(acc, arr[i],i,arr)
+    }
+}
+//test
+const res = arr._reduce((pre, cur) => {
+    return pre + cur;
+  }, 0);
+  

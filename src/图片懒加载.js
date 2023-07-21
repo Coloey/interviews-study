@@ -1,4 +1,8 @@
 //使用document.body.clientHeight获取可视区域高度，使用element.getBoundingClientRect()直接得到元素相对浏览器的top值
+/*window.innerHeight：表示当前浏览器窗口的视口（viewport）高度，即可见区域的高度，不包括浏览器工具栏和滚动条的高度。
+*/
+document.documentElement.clientHeight：表示当前文档在浏览器窗口中可见区域的高度，也是可见区域的高度，不包括浏览器工具栏和滚动条的高度。
+document.documentElement.scrollHeight：表示整个文档的高度，包括超出可见区域的部分。
 function lazyLoad() {
   let viewHeight = document.body.clientHeight;
   let imgs = document.querySelectorAll("img");

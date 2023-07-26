@@ -67,3 +67,32 @@ function removeDuplicate(arr) {
 
 const result = removeDuplicate(arr);
 console.log(result); // [ 1, 2, 'abc', true, false, undefined, NaN ]
+// 数组根据key去重
+/*
+const dedup = (data, getKey = () => {} ) => {
+  // todo
+}*/
+let data = [
+  { id: 1, v: 1 },
+  { id: 2, v: 2 },
+  { id: 1, v: 1 },
+];
+// 以 id 作为排重 key，执行函数得到结果
+// data = [
+//   { id: 1, v: 1 },
+//   { id: 2, v: 2 },
+// ];
+
+const dedup = (data, getKey = () =>{}) => {
+  const dateMap = data.reduce((pre,curr) => {
+    const key=getKey(curr)
+    // 以key作为键值
+    if(!pre[key]){
+      pre[key]=curr
+      // pre={1:{id:1,v:1}}
+    }
+    return pre
+  },{})
+  return Object.values(dateMap)
+}
+console.log(dedup(data, (item) => item.id))

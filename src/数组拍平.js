@@ -40,3 +40,18 @@ function* iterTree(tree) {
     yield tree;
   }
 }
+// 数组拍平指定层数1
+function flatten1(arr, num) {
+  while(arr.some(curr => Array.isArray(curr))&&n>0){
+    arr=[].concat(...arr)
+    n--;
+  }
+  return arr;
+}
+//数组拍平指定层数2
+function flatten2(arr, num) {
+  return num>0 ?
+  arr.reduce((acc,curr)=>{
+    return acc.concat(Array.isArray(curr) ? flatten2(curr,num-1) : curr)
+  },[]) : arr.slice()
+}

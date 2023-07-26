@@ -8,6 +8,7 @@
 </head>
 <body>
    <script>
+    
     class Chain{
         constructor(){
             this.taskList=[]
@@ -18,6 +19,7 @@
                 console.log('eat')
                 r()
             }))
+            // 在每个函数中返回this
             return this
         }
         sleep(time){

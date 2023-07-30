@@ -14,7 +14,7 @@ const thousandSeparator = function (n) {
   }
   return arr.join("");
 };
-// console.log(thousandSeparator(1112345));
+console.log(thousandSeparator(1112345));
 // 有小数版本
 const format = (n) => {
   n = n.toString();

@@ -9,3 +9,12 @@ function myInterval(fn, time) {
     myInterval(fn, time);
   }, time);
 }
+// 间隔时间一定 下一定执行时间离开=上次时间一定
+setTimeout(function repeatMe() {
+  /* Some long block of code... */
+  setTimeout(repeatMe, 10);
+}, 10);
+
+setInterval(function () {
+  /* Some long block of code... */
+}, 10);

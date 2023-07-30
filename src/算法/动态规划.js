@@ -339,3 +339,23 @@ const test23 = (s) => {
   }
   return res;
 };
+//给定一个长度为n的整数数组 a，实现一个算法，计算出从 a 中选择出多个不相邻元素组成最大的和是多少。
+/*input:  [1, 4, 5, 3]
+output: 7
+
+input:  [12, 3, 6, 1, 2, 4]
+output: 22
+*/
+const rob = (nums) => {
+  let n = nums.length;
+  // 前i个元素的最大和是dp[i],dp[i]=Math.max(dp[i-2]+nums[i],dp[i-1])
+  const dp = new Array(n);
+  if (n >= 2) {
+    dp[0] = nums[0];
+    dp[1] = Math.max(nums[0], nums[1]);
+  }
+  for (let i = 2; i < n; i++) {
+    dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
+  }
+  return dp[n - 1];
+};

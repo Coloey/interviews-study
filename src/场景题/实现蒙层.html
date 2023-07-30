@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .hole {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+        /* clip-path: polygon(0 0, 0 100%, 100% 100%,100% 0,0 0,40px 40px,60px 40px,60px 60px,40px 60px,40px 40px); */
+    }
+</style>
+<body>
+    <!-- clip-path属性用于裁剪元素的显示区域，可以通过指定不同的路径形状来实现不同的裁剪效果。clip-path属性可以使用多种值来定义路径形状，以下是一些常用的用法：
+
+    矩形裁剪：
+
+    clip-path: inset(top right bottom left)：从元素内部的指定边界裁剪。
+    clip-path: rect(top right bottom left)：从元素外部的指定边界裁剪。
+    基本形状裁剪：
+
+    clip-path: circle(radius at center)：圆形裁剪，radius可以是具体的像素值或百分比，center可以是具体的坐标值或关键字。
+    clip-path: ellipse(radiusX radiusY at center)：椭圆形裁剪，radiusX和radiusY分别代表水平和垂直半径。
+    clip-path: polygon(x1 y1, x2 y2, x3 y3, ...)：多边形裁剪，通过指定各个顶点的坐标来定义多边形形状。
+    自定义路径裁剪：
+
+    clip-path: path("Mx1 y1 Lx2 y2 Lx3 y3 ... Z")：使用SVG路径语法定义裁剪路径。
+    渐变裁剪（只有Chrome和Safari支持）：
+
+    clip-path: url(#gradient)：使用SVG渐变定义裁剪形状。 -->
+    <!-- 实现蒙层 中间有1个100*100的矩形区域挖空 -->
+    <div class="mask">
+        <div class="hole"></div>
+    </div>
+</body>
+</html>

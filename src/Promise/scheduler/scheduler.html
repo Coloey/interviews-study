@@ -19,8 +19,7 @@
         this.taskList.push(promiseCreator);
       }
       start() {
-        if(this.taskList.length===0)return
-		       
+        if(this.taskList.length===0)return    
         while(this.count<this.maxNum){
           //运行任务增加
           this.count++
@@ -35,7 +34,6 @@
         }      
       }
     }
-
     const timeout = (time) =>
     	new Promise((resolve) => {
         	setTimeout(resolve, time);
@@ -49,8 +47,6 @@
     addTask(300, "3");
     addTask(400, "4");
     scheduler.start();
-
-
   </script>
 </body>
 </html>

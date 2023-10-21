@@ -28,9 +28,16 @@ function cssStyle2DomStyle(sName) {
   }
   return res;
 }*/
-const underline2Camel = (str) =>
+const underline2Camel = (str) => {
   str.replace(/_(\w)/g, (p1, p2) => p2.toUpperCase());
-const camel2underline = (str) =>
+  return str;
+};
+const camel2underline = (str) => {
   str.replace(/[A-Z]/g, (p1) => `_${p1.toLowerCase()}`);
+  if (str.slice(0, 1) === "_") {
+    str = str.slice(1);
+  }
+  return str;
+};
 console.log(underline2Camel("hello_world"));
 console.log(camel2underline("helloWorldMyFriend"));

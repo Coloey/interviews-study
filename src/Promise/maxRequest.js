@@ -15,18 +15,38 @@ function maxRequest(fn, maxNum) {
   });
 }
 // async 实现
-async function maxRequest2(fn,maxNum){
-  for(let i=0;i<maxNum;i++){
-    try{
-      await new Promise((resolve,reject) => {
-        fn()
-        resolve()
-      })
+async function maxRequest2(fn, maxNum) {
+  for (let i = 0; i < maxNum; i++) {
+    try {
+      await new Promise((resolve, reject) => {
+        fn();
+        resolve();
+      });
       // 在允许请求的次数内成功 则跳出循环
       break;
-    }catch(err){
+    } catch (err) {
       // 失败则被捕获，进入下一轮循环
-      console.log(err)
+      console.log(err);
     }
   }
 }
+const fetchWithAutoRetry = (fetcher, maximumRetryCount) => {
+  return new Promise((resolve, reject) => {
+    let cnt = 0;
+    const retry = () => {
+      fetcher()
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((error) => {
+          if (cnt < maximumRetryCount) {
+            cnt++;
+            retry();
+          } else {
+            reject(error);
+          }
+        });
+    };
+    retry();
+  });
+};

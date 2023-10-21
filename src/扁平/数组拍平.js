@@ -42,16 +42,22 @@ function* iterTree(tree) {
 }
 // 数组拍平指定层数1
 function flatten1(arr, num) {
-  while(arr.some(curr => Array.isArray(curr))&&n>0){
-    arr=[].concat(...arr)
+  while (arr.some((curr) => Array.isArray(curr)) && n > 0) {
+    arr = [].concat(...arr);
     n--;
   }
   return arr;
 }
 //数组拍平指定层数2
 function flatten2(arr, num) {
-  return num>0 ?
-  arr.reduce((acc,curr)=>{
-    return acc.concat(Array.isArray(curr) ? flatten2(curr,num-1) : curr)
-  },[]) : arr.slice()
+  return num > 0
+    ? arr.reduce((acc, curr) => {
+        return acc.concat(Array.isArray(curr) ? flatten2(curr, num - 1) : curr);
+      }, [])
+    : arr.slice();
 }
+// split和toString,toString会把数转为逗号分隔的字符串，再用split方法转为数组
+function flatten(arr) {
+  return arr.toString().split(",");
+}
+flatten([1, [2, [3, 4]]]);

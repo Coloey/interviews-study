@@ -1,18 +1,12 @@
 function jsonp(url, paramObj, fn) {
   //用于拼接请求参数
   const objToQuery = function (url, paramObj, fn) {
-    const paramArr = [];
-    for (let param in paramObj) {
-      paramArr.push(
-        encodeURIComponent(param) + "=" + encodeURIComponent(paramObj[param])
-      );
+    const params = "";
+    for (let key in paramObj) {
+      params += `${key}=${paramObj[key]}&`;
     }
-    return (
-      url +
-      "?" +
-      (paramArr.length > 0 ? paramArr.join("&") + "&" : "") +
-      `callback=${fn}`
-    );
+    params += `callback=${fn}`;
+    return `${url}?${params}`;
   };
   let fnName = fn.name;
   let script = document.createElement("script");

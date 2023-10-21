@@ -21,6 +21,7 @@ demo.addEventListener("mousemove", function (e) {
   let initLeft = demo.style.left == 0 ? 0 : demo.style.left;
   let initRight = demo.style.top == 0 ? 0 : demo.style.top;
   console.log(initLeft, initRight);
+  // 无论物品放在哪 移动的距离都是鼠标移动的距离，所以加上初始位置
   demo.style.left = tranX + parseInt(initLeft) + "px";
   demo.style.top = tranY + parseInt(initRight) + "px";
   // console.log(demo.style.left, demo.style.right);

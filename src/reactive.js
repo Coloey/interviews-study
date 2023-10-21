@@ -31,7 +31,7 @@ function trigger(target, key) {
 function reactive(target) {
   const handler = {
     get(target, key, receiver) {
-      let res = Reflect.get(target, key, receiver);
+      let res = Reflect.get(target, key, receiver);//这里用Reflect的原因是修正this指向，相当于target.apply(receiver)
       track(target, key); //if reactive property is Get inside then tarck the effect to rerun on SET,add the effect to the dep
       return res;
     },

@@ -2,6 +2,7 @@
 const thousandSeparator = function (n) {
   n = n.toString();
   const arr = [];
+  // 计算数字个数，到达3个就可以加点号，并且重置个数为1
   let count = 0;
   for (let i = n.length - 1; i >= 0; i--) {
     count++;

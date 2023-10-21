@@ -1,5 +1,5 @@
 class Storage {
-  constructor(time) {
+  constructor(maxAge) {
     this.time = maxAge;
   }
   set(key, val, maxAge) {
@@ -16,7 +16,7 @@ class Storage {
       return null;
     }
     item = JSON.parse(item);
-    let nowTime = Dat.now();
+    let nowTime = Date.now();
     if (item.maxAge && item.maxAge < nowTime - item.cTime) {
       this.remove(key);
       return null;

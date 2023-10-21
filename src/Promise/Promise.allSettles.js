@@ -41,3 +41,23 @@ Promise.myAllSettled = (promises) => {
     });
   });
 };
+// 使用finally
+function PromiseAllSettled(promises) {
+  return new Promise((resolve) => {
+    let res = [];
+    let cnt = 0;
+    promises.forEach((p, i) => {
+      Promise.resolve(p)
+        .then((data) => {
+          res[i] = { status: "fulfilled", value: data };
+        })
+        .catch((err) => {
+          res[i] = { status: "rejected", reason: err };
+        })
+        .finally(() => {
+          cnt++;
+          cnt === promises.length && resolve(res);
+        });
+    });
+  });
+}

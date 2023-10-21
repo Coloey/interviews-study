@@ -11,10 +11,11 @@ let Common = {
       return Object.prototype.toString
         .call(obj)
         .replace("[object", "")
-        .replace("]")
+        .replace("]", "")
         .toLowerCase();
     };
     // 基本数据类型用typeof判断
     return typeof obj === "object" ? get_type(obj) : typeof obj;
   },
 };
+console.log(Common.getType(new Date()));

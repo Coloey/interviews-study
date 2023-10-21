@@ -33,28 +33,31 @@
 // }
 // */
 // 根据键获取值
+/*
+    用void 0代替undefined原因：
+    undefined表达都会被编译成void 0
+    1. 某些情况下undefined判断存在风险 因undefined有被修改的可能性 但是void 0返回值一定是undefined
+    2. 兼容性上void 0基本所有浏览器支持
+    3. void 0比undefined字符占用空间少
+*/
     //同一个键有多个值
     function getUrlParam(sUrl, sKey) {
         // 获取?到#之间的字符串
-        const queryStr = sUrl.indexOf('#')===-1 ? sUrl.slice(sUl.indexOf('?')+1) : sUrl.slice(sUrl.indexOf('?')+1, sUrl.indexOf('#'))
-        // 根据&分隔
-        const querys = queryStr.split('&')
-        let queryMap=new Map()
+        const querys = sUrl.split('?')[1].split('#')[0].split('&')
+        const obj={}
         for(let query of querys) {
-            let key=query.split('=')[0]
-            let val=query.split('=')[1]
-            // 已经存在一个键值对
-            if(queryMap.has(key)) {
-                let temp=[].concat(queryMap.get(key))
-                temp.push(val)
-                queryMap.set(key,temp)
+            const [key, value] = query.split('=')
+            // 第一次遍历到这个元素，直接添加到对象上
+            if(obj[key] === void 0) {
+                obj[key]=value
             }else{
-                queryMap.set(key,val)
+                //键已经存在，通过数组存值
+                obj[key]=[].concat(obj[key],value)
             }
         }
         // 给定的参数有该键则返回值
-        if(queryMap.has(sKey)){
-            return queryMap.get(key)
+        if(obj[sKey]){
+            return obj[sKey] || ''
         }else{
             return {}
         }

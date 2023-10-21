@@ -1,6 +1,6 @@
 //手写call
 Function.prototype._call = function (context = window) {
-  //判断调用对象是都是个函数
+  //判断调用对象是否是个函数
   if (typeof this !== "function") {
     throw Error("this is not a function");
   }

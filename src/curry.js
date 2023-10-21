@@ -11,3 +11,12 @@ function sum(a, b, c) {
 const curried = curry(sum);
 console.log(curried(1)(2)(3)); // 6
 console.log(curried(1, 2)(3)); // 6
+const curry2 = (fn) => {
+  return function (a) {
+    return function (b) {
+      return function (c) {
+        return fn(a, b, c);
+      };
+    };
+  };
+};

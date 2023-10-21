@@ -15,14 +15,18 @@ function debounce(fn, delay = 500) {
 2 数据封装:可以隐藏内部状态和逻辑，只暴露一个公共函数，可以避免全局命名冲突，提供更清晰的接口
 3 资源利用： 使用闭包，可以避免重复创建计时器或其他资源，闭包内部状态可以被多次调用复用
 */
+//立即执行版本：触发事件后函数立即执行，n秒内触发事件不会执行功能函数下一次调用，n秒后再次触发才会再次执行功能函数
 function debounce2(fn, delay = 500, immediate) {
   let timer;
   return function (...args) {
     let context = this;
     if (timer) clearTimeout(timer);
     if (immediate) {
-      immediate = !immediate;
-      fn.apply(context, args);
+      const callNow = !timer;
+      timer = setTimeout(() => {
+        timer = null;
+      }, delay);
+      if (callNow) fn.apply(context, args);
     } else {
       timer = setTimeout(() => {
         fn.apply(context, args);

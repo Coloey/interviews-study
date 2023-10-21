@@ -16,3 +16,16 @@ function moveZero(nums) {
 const nums = [1, 0, 2, 0, 3];
 //console.log(nums);
 moveZero(nums);
+// 最长公共前缀
+const longestCommon = (strs) => {
+  let longest = "";
+  let res = "";
+  let first = strs[0];
+  for (let i = 0; i < first.length; i++) {
+    longest += first[i];
+    if (strs.every((v) => v.startsWith(longest))) {
+      res = longest;
+    }
+  }
+  return res;
+};

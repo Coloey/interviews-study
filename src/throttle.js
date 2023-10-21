@@ -16,7 +16,7 @@ function throttled1(fn, delay = 500) {
   return function (...args) {
     let context = this;
     if (!timer) {
-      //n秒内可以触发多次，但是间隔n秒执行一次
+      //n秒内连续触发多次，只执行一次
       timer = setTimeout(() => {
         fn.apply(context, args);
         timer = null; //只有执行完一次把timer设置为null，才能再次触发

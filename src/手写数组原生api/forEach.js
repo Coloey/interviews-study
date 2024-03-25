@@ -6,7 +6,7 @@ Array.prototype.forEach = function (fn, thisValue) {
   }
   while (index < arr.length) {
     if (index in arr) {
-      //forEach传入回调函数在这里执行，因此无法在回调函数中用continue或者break跳出循环 return 可以终止cb的作用，但是会结束单签迭代，进入下一个循环
+      //forEach传入回调函数在这里执行，因此无法在回调函数中用continue或者break跳出循环 return 可以终止cb的作用，但是会结束当前迭代，进入下一个循环
       fn.call(thisValue, arr[index], index, arr);
     }
     index++;

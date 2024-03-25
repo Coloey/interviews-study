@@ -142,6 +142,7 @@ class MyPromise {
   //不管成功还是失败都会走到finally,并且finally后可以继续.then,并且将值传递给后面的.then
   static finally(callback) {
     return this.then(
+      //value是上一个Promise的返回值,callback默认没有参数
       (value) => {
         return MyPromise.resolve(callback()).then(() => {
           return value;

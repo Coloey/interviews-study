@@ -37,6 +37,7 @@ const postorderTraversal = (root) => {
   let res = [];
   if (!root) return res;
   let st = [];
+  st.push(root)
   while (st.length > 0) {
     let node = st.pop();
     res.push(node.val);
@@ -61,6 +62,7 @@ const cengxvTraversal = (root) => {
       if (node.left) que.push(node.left);
       if (node.right) que.push(node.right);
     }
+    if(i%2===0)currLevel=currLevel.reverse()
     res.push(currLevel);
   }
   return res;

@@ -1,5 +1,5 @@
 const requestAnimationFrame = (callback) => {
-  let lastTime = 0;
+  let lastTime = new Date().getTime();
   let vendors = ["webkit", "moz"];
   for (let i = 0; i < vendors.length && !window.requestAnimationFrame; ++i) {
     window.requestAnimationFrame = window[vendors[i] + "RequestAnimationFrame"];

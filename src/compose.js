@@ -12,3 +12,10 @@ const multiply = (x) => x * 2;
 const minus = (x) => x - 1;
 
 console.log(compose(minus, multiply, add)(1)); // 3
+const compose2 = (...funcs) => {
+  return funcs.reduce((a, b) => {
+    return function (x) {
+      return a(b(x))
+    }
+  })
+}

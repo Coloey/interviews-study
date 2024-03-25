@@ -11,6 +11,7 @@ const proxy = promisify(asyncFn);
 proxy(11, 22).then((res) => {
   console.log(res);
 });
+
 function promisify(asyncFn) {
   return function (...args) {
     return new Promise((resolve) => {
@@ -22,4 +23,18 @@ function promisify(asyncFn) {
       asyncFn.apply(null, args);
     });
   };
+}
+
+function promisify2(asyncFn) {
+  return function (...args) {
+    return new Promise((resolve) => {
+      asyncFn(...args, (err, data) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(data)
+        }
+      });
+    })
+  }
 }

@@ -1,9 +1,9 @@
 //节流:n秒内只运行一次，若在n秒内重复触发，只有一次生效
 function throttleed(fn, delay = 500) {
-  let oldTime = new Date.now();
+  let oldTime = Date.now();
   return function (...args) {
     let context = this;
-    let newTime = new Date.now();
+    let newTime = Date.now();
     if (newTime - oldTime > delay) {
       fn.apply(context, args);
       oldTime = newTime;

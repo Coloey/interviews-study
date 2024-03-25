@@ -1,31 +1,31 @@
 "use strict";
 
 function shuffle(arr) {
-  var len = arr.length - 1,
-      random;
+  var len = arr.length;
 
-  while (len !== 0) {
-    //从数组最后一个元素向前，向下取整，从数组中的前len-1个元素任意取一个与最后一个元素交换，继续取倒数第二个元素，与前n-2元素交换
-    random = Math.floor(Math.random() * (len - 1));
-    var _ref = [arr[len], arr[random]];
-    arr[random] = _ref[0];
-    arr[len] = _ref[1];
-    len--;
+  for (var i = 0; i < len; i++) {
+    // [i,len-1]
+    var j = Math.floor(Math.random() * (len - i))[(this.nums[i], this.nums[j])] = [this.nums[j], this.nums[i]];
   }
 
   return arr;
-} //m元随机分配给n个人
+} // k个奖品分给m个人
 
 
-function shuffle2(m, n) {
-  var arr = new Array(m);
-  var random;
+function selectWinner(k, m) {
+  var personList = new Array(m);
+  var winnerList = [];
 
-  while (m !== 0) {
-    random = Math.floor(Math.random() * m);
-    arr.push(random);
-    m -= random;
+  for (var i = 0; i < m; i++) {
+    personList[i] = i;
   }
 
-  return arr;
+  while (winnerList.length < k) {
+    // 从人员列表中随机选择一个人
+    var randomIndex = Math.floor(Math.random() * personList.length);
+    winnerList.push(personList[randomIndex]);
+    personList.splice(randomIndex, 1);
+  }
+
+  return winnerList;
 }

@@ -44,6 +44,7 @@ function reduce(fn, initValue) {
   for (let i = initIndex; i < arr.length; i++) {
     acc = fn(acc, arr[i], i, arr);
   }
+  return acc
 }
 //test
 const res = arr._reduce((pre, cur) => {

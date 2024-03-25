@@ -1,4 +1,8 @@
 // 电话号码组合
+/*
+输入："23"
+输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+*/
 const letterCombanations = (digits) => {
   if (digits.length == 0) return [];
   const letterMap = [

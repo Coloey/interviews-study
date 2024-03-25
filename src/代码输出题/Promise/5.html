@@ -21,13 +21,13 @@
                 console.log(p1)
             }, 1000)
         }).finally(res => {
-            console.log('finally', res)
+            console.log('finally', res)            
             throw new Error("catch 1")
         })
         /*  resolve1
             finally  undefined
             timer1
-            Promise{<resolved>: undefined}*/
+            Promise{<rejected>:  Error: catch 1 }*/
         /*finally()不管Promise对象最后状态如何都会执行，finally()的回调函数不接受任何参数，在
         .finally()中无法知道Promise的最终状态是fullfilled还是rejected,忽略finally的返回值，它
         最终返回默认上一次的Promise对象值，不过如果抛出一个异常，则会返回异常的Promise对象

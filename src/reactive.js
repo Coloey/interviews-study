@@ -79,3 +79,55 @@ product.price = 10;
 console.log(
   `After updated quantity total=${total} salePrice=${salePrice.value}`
 );
+// Vue2 观察者模式
+function observe(target){
+  if(target & typeof target === 'object') {
+    Object.keys(target).forEach((key) => {
+      defineReactive(target, key, target[key])
+    })
+  }
+}
+//观察者
+class Sub{
+  constructor(){
+    console.log('observer create')
+  }
+  update(key,value){
+      console.log(`${key}属性变成了了${value}`)
+  }
+}
+//被观察者
+class Dep{
+  constructor(){
+    //初始化订阅队列
+    this.subs=[]
+  }
+  //增加观察者
+  addSub(sub){
+    this.subs.push(sub)
+  }
+  //通知观察者
+  notify(key,value){
+    this.subs.forEach((sub) => {
+      if(sub===key){
+        sub.update(key,value)
+      }
+    })
+  }
+}
+function defineReactive(target, key, val){  
+  const dep=new Dep()
+  //对象递归调用
+  observe(val)
+  Object.defineProperty(target,key,{
+    enumerable: true,
+    configurable: false,
+    get: function () {
+      return val;
+    },
+    set:function(value){
+      //通知观察者
+      dep.notify(key,value)
+    }
+  })
+}

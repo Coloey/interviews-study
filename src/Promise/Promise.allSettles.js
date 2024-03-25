@@ -35,7 +35,7 @@ Promise.myAllSettled = (promises) => {
             reason: err,
           };
           if (cnt === len) {
-            reject(res);
+            resolve(res);
           }
         });
     });

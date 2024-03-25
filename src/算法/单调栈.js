@@ -84,3 +84,50 @@ const trap2 = (height) => {
     }
     return res
 }
+// 有效括号
+function isValid(str){
+    let st=[]
+    for(let i=0;i<str.length;i++){
+        let c=s[i]
+        switch (c){
+            case '(':
+                st.push(')');
+                break;
+            case '[':
+                st.push(']');
+                break;
+            case '{':
+                st.push('}');
+                break;
+            default:
+                if(st[st.length-1]!==c){
+                    return false;
+                }
+        }
+    }
+    return st.length===0
+}
+//队列实现栈
+let MyStack = function(){
+    this.que=[]
+}
+MyStack.prototype.push=function(x){
+    this.que.push(x)
+}
+MyStack.prototype.pop = function(){
+    let size=this.que.length
+    while(size-- > 1){
+        this.que.push(this.que.shift())
+    }
+    return this.que.shift()
+}
+MyStack.prototype.top=function(){
+    //弹出的即是栈顶元素
+    const x = this.pop()
+    //补回弹出的元素
+    this.que.push(x)
+    return x
+}
+MyStack.prototype.empty=function(){
+    return !this.que.length
+}

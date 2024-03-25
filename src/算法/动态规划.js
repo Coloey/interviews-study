@@ -8,7 +8,7 @@ const test1 = (n) => {
   }
   return dp[n];
 };
-//最小话费爬楼梯
+//最小花费爬楼梯
 const test2 = (costs) => {
   let n = costs.length;
   let dp = new Array(n + 1).fill(0);

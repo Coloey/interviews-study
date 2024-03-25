@@ -12,25 +12,31 @@ function request(url) {
     console.log("外部逻辑", res);
   });
 }
+
 //非Promise.race()
-/*function addTask(url) {
-  let task = request(url);
-  pool.push(task);
-  task.then((res) => {
-    //请求结束将Promise任务从pool中移除
-    pool.splice(pool.indexOf(task), 1);
-    console.log(`${url}结束，当前并发数:${pool.length}`);
-    url = urls.shift();
-    //并发池跑完一个任务再塞入一个任务
-    if (url !== undefined) {
-      addTask(url);
-    }
-  });
+function limitRequest(urls,max){
+  let pool = [];
+  const addTask = (url) => {
+    let task = request(url);
+    pool.push(task);
+    task.then((res) => {
+      //请求结束将Promise任务从pool中移除
+      pool.splice(pool.indexOf(task), 1);
+      console.log(`${url}结束，当前并发数:${pool.length}`);
+      url = urls.shift();
+      //并发池跑完一个任务再塞入一个任务
+      if (url !== undefined) {
+        addTask(url);
+      }
+    
+    })
+  }
+  while (pool.length < max) {
+    let url = urls.shift();
+    addTask(url);
+  }
 }
-while (pool.length < max) {
-  let url = urls.shift();
-  addTask(url);
-}*/
+
 //Promise.race()实现
 function addTask(url) {
   let task = request(url);
@@ -56,8 +62,9 @@ while (pool.length < max) {
 }
 let race = Promise.race(pool);
 run(race);
+
 //Promise+async...await
-/*async function fn() {
+async function fn() {
   for (let i = 0; i < urls.length; i++) {
     let task = request(urls[i]);
     //请求结束将Promise任务从pool中移除
@@ -74,4 +81,4 @@ run(race);
   //执行完所有任务才返回结果
   await Promise.allSettled(pool);
 }
-fn();*/
+fn();

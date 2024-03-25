@@ -42,3 +42,7 @@ const format = (n) => {
     : arr.reverse().join("") + "." + decimals;
 };
 console.log(format(12345678.1234));
+// 转换成英文的格式化
+function format(number) {
+  return number.toLocaleString('en')
+}

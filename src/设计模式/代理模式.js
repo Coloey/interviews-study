@@ -1,23 +1,38 @@
-let myImage=(function(){
-    let ImageNode = document.createElement('img')
-    document.body.appendChild(ImageNode)
-    return function(src){
-        ImageNode.src = src
+//虚拟代理图片预加载
+class PreLoadImage {
+    constructor(imgNode){
+        //获取真实dom结点
+        this.imgNode=imgNode
     }
-})()
+    //操作img结点的src属性
+    setSrc(imgUrl){
+        this.imgNode.src=imgUrl
+    }
+}
+class ProxyImage {
+    // 占位图url地址
+    static LOADING_URL = 'xxx';
+    constructor(targetImage){
+        // 目标Image 即PreloadImage实例
+        this.targetImage=targetImage
+    }
+    //操作虚拟Image 完成加载
+    setSrc(targetUrl){
+        this.targetImage.setSrc(ProxyImage.LOADING_URL)
+        //创建一个帮我们加载图片的虚拟Image实例
+        const virtualImage = new Image()
+        virtualImage.onload=()=>{
+            this.targetImage.setSrc(targetUrl)
+        }
+        // 设置src属性 虚拟Image实例开始加载图片
+        virtualImage.src = targetUrl
+    }
+}
 
-let proxyImage = (function(){
-    let img = new Image
-    img.onload=function(){
-        myImage(this.src)
-    }
-    return function(){
-        myImage('file://C:/Users/sevenaeng/Desktop/loading.jpg')
-        img.src=src
-    }
-})()
-
-proxyImage('http://imgcache.qq.com/music/a.jpg')
+const img = document.getElementsByTagName('img')
+const preloadImg=new PreLoadImage(img)
+const proxyImage=new ProxyImage(preloadImg)
+proxyImage.setSrc('http://imgcache.qq.com/music/a.jpg')
 //虚拟代理合并http请求
 let synchronusFile = function(id){
     console.log('开始同步文件,id为:'+id)
